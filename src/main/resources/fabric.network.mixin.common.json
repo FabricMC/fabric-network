@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "net.fabricmc.network.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+		"SPacketHandler"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
