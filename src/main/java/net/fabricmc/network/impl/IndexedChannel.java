@@ -64,12 +64,12 @@ public class IndexedChannel extends AbstractChannel<AbstractPacket> {
 
 //	Server -> Client(s)
 	public void sendToPlayer(AbstractPacket packet, EntityPlayerServer player) {
-		player.networkHandler.a(new CPacketCustomPayload(getChannel(), createPacketBuf(packet)));
+		player.networkHandler.sendPacket(new CPacketCustomPayload(getChannel(), createPacketBuf(packet)));
 	}
 
 	public void sendToAll(AbstractPacket packet, List<EntityPlayerServer> players) {
 		CPacketCustomPayload wrapper = new CPacketCustomPayload(getChannel(), createPacketBuf(packet));
-		players.forEach(player -> player.networkHandler.a(wrapper));
+		players.forEach(player -> player.networkHandler.sendPacket(wrapper));
 	}
 
 	public void sendToAll(AbstractPacket packet, List<EntityPlayerServer> players, Predicate<EntityPlayerServer> predicate) {
@@ -89,11 +89,11 @@ public class IndexedChannel extends AbstractChannel<AbstractPacket> {
 	}
 
 	public void sendToAllInRadius(AbstractPacket packet, int dimension, Vec3d pos, double radius) {
-		sendToAllInRadius(packet, Fabric.getSidedHandler().getServerInstance().a(dimension), pos, radius);
+		sendToAllInRadius(packet, Fabric.getSidedHandler().getServerInstance().getWorld(dimension), pos, radius);
 	}
 
 	public void sendToAllInRadius(AbstractPacket packet, int dimension, Vec3i pos, double radius) {
-		sendToAllInRadius(packet, Fabric.getSidedHandler().getServerInstance().a(dimension), pos, radius);
+		sendToAllInRadius(packet, Fabric.getSidedHandler().getServerInstance().getWorld(dimension), pos, radius);
 	}
 
 }
