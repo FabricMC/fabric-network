@@ -13,70 +13,14 @@ buildscript {
 
 plugins {
 	id "idea"
-	id "maven"
-	id "net.minecrell.licenser" version "0.2.1"
 }
 
 apply plugin: "net.fabricmc.loom"
 
+apply from: 'https://github.com/FabricMC/fabric-docs/raw/master/gradle/maven.gradle'
+apply from: 'https://github.com/FabricMC/fabric-docs/raw/master/gradle/license.gradle'
+
 minecraft {
 	version = mc_version
 	fabricVersion = fabric_version
-}
-
-license {
-	header file("HEADER")
-	include "**/*.java"
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            if (project.hasProperty('mavenPass')) {
-                repository(url: 'http://mavenupload.modmuss50.me/') {
-                    authentication(userName: 'buildslave', password: project.getProperty('mavenPass'))
-                }
-            } else {
-               repository(url: 'file:///var/www/maven/')
-            }
-
-            pom {
-                artifactId = project.archivesBaseName
-
-                project {
-                    name = project.name
-                    description = project.description
-                    packaging = 'jar'
-                    url = project.url
-
-                    scm {
-                        url = project.url
-                        connection = 'scm:git:git@github.com:FabricMC/fabric-network.git'
-                        developerConnection = 'scm:git:git@github.com:FabricMC/fabric-network.git'
-                    }
-
-                    issueManagement {
-                        system = 'GitHub'
-                        url = 'https://github.com/FabricMC/fabric-language-kotlin/issues'
-                    }
-
-                    licenses {
-                        license {
-                            name = 'Apache License 2.0'
-                            url = 'https://github.com/FabricMC/fabric-network/blob/master/LICENSE'
-                            distribution = 'repo'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id = 'shadowfacts'
-                            name = 'shadowfacts'
-                            roles { role 'developer' }
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
