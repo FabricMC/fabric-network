@@ -5,6 +5,5 @@
 	"mixins": {
 		"client": "fabric.network.mixin.client.json",
 		"common": "fabric.network.mixin.common.json"
-	},
-	"modClass": "net.fabricmc.network.test.NetworkTest"
+	}
 }
