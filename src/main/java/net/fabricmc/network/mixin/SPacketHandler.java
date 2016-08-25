@@ -31,8 +31,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = NetworkGameHandlerServer.class, remap = false)
 public abstract class SPacketHandler {
 
-	@Inject(method = "a(Lnet/minecraft/network/packet/server/SPacketCustomPayload;)V", at = @At("RETURN"))
-	public void a(SPacketCustomPayload packet, CallbackInfo info) {
+	@Inject(method = "onCustomPayload(Lnet/minecraft/network/packet/server/SPacketCustomPayload;)V", at = @At("RETURN"))
+	public void onCustomPayload(SPacketCustomPayload packet, CallbackInfo info) {
 		if (packet.a().startsWith(NetworkManager.CHANNEL_PREFIX)) {
 			PacketByteBuf buf = packet.b();
 			AbstractChannel channel = NetworkManager.getChannel(packet.a().substring(NetworkManager.CHANNEL_PREFIX.length()));
