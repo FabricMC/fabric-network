@@ -20,7 +20,7 @@ import net.fabricmc.network.AbstractChannel;
 import net.fabricmc.network.AbstractPacket;
 import net.fabricmc.network.NetworkManager;
 import net.fabricmc.network.util.NetworkHelper;
-import net.minecraft.client.network.NetworkHandlerClient;
+import net.minecraft.client.network.handler.impl.NetworkGameHandlerClient;
 import net.minecraft.network.packet.client.CPacketCustomPayload;
 import net.minecraft.util.PacketByteBuf;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = NetworkHandlerClient.class, remap = false)
+@Mixin(value = NetworkGameHandlerClient.class, remap = false)
 public abstract class CPacketHandler {
 
 	@Inject(method = "a(Lnet/minecraft/network/packet/client/CPacketCustomPayload;)V", at = @At("RETURN"))

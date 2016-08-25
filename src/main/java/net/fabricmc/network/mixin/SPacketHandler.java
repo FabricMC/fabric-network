@@ -20,7 +20,7 @@ import net.fabricmc.network.AbstractChannel;
 import net.fabricmc.network.AbstractPacket;
 import net.fabricmc.network.NetworkManager;
 import net.fabricmc.network.util.NetworkHelper;
-import net.minecraft.network.NetworkHandlerServer;
+import net.minecraft.network.handler.impl.NetworkGameHandlerServer;
 import net.minecraft.network.packet.server.SPacketCustomPayload;
 import net.minecraft.util.PacketByteBuf;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = NetworkHandlerServer.class, remap = false)
+@Mixin(value = NetworkGameHandlerServer.class, remap = false)
 public abstract class SPacketHandler {
 
 	@Inject(method = "a(Lnet/minecraft/network/packet/server/SPacketCustomPayload;)V", at = @At("RETURN"))
