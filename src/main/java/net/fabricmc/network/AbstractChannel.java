@@ -18,10 +18,26 @@ package net.fabricmc.network;
 
 import net.minecraft.util.PacketByteBuf;
 
+/**
+ * The base class for a channel receiving and sending packets.
+ * Implementers are encouraged to use impl.SimpleAbstractChannel instead,
+ * as it includes a lot of useful helper functions.
+ *
+ * @param <T> The base packet type.
+ */
 public abstract class AbstractChannel<T extends AbstractPacket> {
-
+    /**
+     * Write a packet to a byte buffer.
+     * @param buf
+     * @param packet
+     */
     public abstract void write(PacketByteBuf buf, T packet);
 
+    /**
+     * Read a packet from a byte buffer.
+     * @param buf
+     * @return
+     */
     public abstract T read(PacketByteBuf buf);
 
 }

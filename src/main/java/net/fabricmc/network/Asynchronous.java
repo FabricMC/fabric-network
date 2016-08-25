@@ -21,6 +21,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * This annotation is intended for packets which are to be handled
+ * asynchronously rather than in the game's main (client/server) thread.
+ * Use it only when you're sure about your thread safety.
+ */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Asynchronous {

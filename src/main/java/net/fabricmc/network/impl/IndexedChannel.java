@@ -25,7 +25,7 @@ import net.fabricmc.network.AbstractChannel;
 import net.fabricmc.network.AbstractPacket;
 import net.fabricmc.network.NetworkManager;
 import net.fabricmc.network.util.NetworkHelper;
-import net.minecraft.entity.player.EntityPlayerClient;
+import net.minecraft.client.player.EntityPlayerClient;
 import net.minecraft.entity.player.EntityPlayerServer;
 import net.minecraft.network.packet.client.CPacketCustomPayload;
 import net.minecraft.network.packet.server.SPacketCustomPayload;
@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class IndexedChannel extends AbstractChannel<AbstractPacket> {
+public class IndexedChannel extends SimpleAbstractChannel<AbstractPacket> {
 
 	private BiMap<Class<? extends AbstractPacket>, Integer> ids = HashBiMap.create();
 	private int nextId = 0;
@@ -63,53 +63,4 @@ public class IndexedChannel extends AbstractChannel<AbstractPacket> {
 			throw new RuntimeException(e);
 		}
 	}
-
-	private PacketByteBuf createPacketBuf(AbstractPacket packet) {
-		return NetworkHelper.createPacketBuf(this, packet);
-	}
-
-	private String getChannel() {
-		return NetworkManager.CHANNEL_PREFIX + NetworkManager.getChannelName(this);
-	}
-
-//	Client -> Server
-	@Sided(Side.CLIENT)
-	public void sendToServer(AbstractPacket packet) {
-		((EntityPlayerClient) Fabric.getSidedHandler().getClientPlayer()).networkHandler.a(new SPacketCustomPayload(getChannel(), createPacketBuf(packet)));
-	}
-
-//	Server -> Client(s)
-	public void sendToPlayer(AbstractPacket packet, EntityPlayerServer player) {
-		player.networkHandler.sendPacket(new CPacketCustomPayload(getChannel(), createPacketBuf(packet)));
-	}
-
-	public void sendToAll(AbstractPacket packet, List<EntityPlayerServer> players) {
-		CPacketCustomPayload wrapper = new CPacketCustomPayload(getChannel(), createPacketBuf(packet));
-		players.forEach(player -> player.networkHandler.sendPacket(wrapper));
-	}
-
-	public void sendToAll(AbstractPacket packet, List<EntityPlayerServer> players, Predicate<EntityPlayerServer> predicate) {
-		sendToAll(packet, players.stream()
-				.filter(predicate)
-				.collect(Collectors.toList()));
-	}
-
-	public void sendToAllInRadius(AbstractPacket packet, WorldServer world, Vec3d pos, double radius) {
-		double maxDist = radius * radius + radius * radius + radius * radius;
-		sendToAll(packet, world.b(EntityPlayerServer.class,
-				player -> player.e(pos.x, pos.y, pos.z) <= maxDist));
-	}
-
-	public void sendToAllInRadius(AbstractPacket packet, WorldServer world, Vec3i pos, double radius) {
-		sendToAllInRadius(packet, world, new Vec3d(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5), radius);
-	}
-
-	public void sendToAllInRadius(AbstractPacket packet, int dimension, Vec3d pos, double radius) {
-		sendToAllInRadius(packet, Fabric.getSidedHandler().getServerInstance().getWorld(dimension), pos, radius);
-	}
-
-	public void sendToAllInRadius(AbstractPacket packet, int dimension, Vec3i pos, double radius) {
-		sendToAllInRadius(packet, Fabric.getSidedHandler().getServerInstance().getWorld(dimension), pos, radius);
-	}
-
 }
