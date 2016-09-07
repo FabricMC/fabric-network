@@ -33,9 +33,9 @@ public abstract class SPacketHandler {
 
 	@Inject(method = "onCustomPayload(Lnet/minecraft/network/packet/server/SPacketCustomPayload;)V", at = @At("RETURN"))
 	public void onCustomPayload(SPacketCustomPayload packet, CallbackInfo info) {
-		if (packet.a().startsWith(NetworkManager.CHANNEL_PREFIX)) {
-			PacketByteBuf buf = packet.b();
-			AbstractChannel channel = NetworkManager.getChannel(packet.a().substring(NetworkManager.CHANNEL_PREFIX.length()));
+		if (packet.getChannel().startsWith(NetworkManager.CHANNEL_PREFIX)) {
+			PacketByteBuf buf = packet.getData();
+			AbstractChannel channel = NetworkManager.getChannel(packet.getChannel().substring(NetworkManager.CHANNEL_PREFIX.length()));
 			AbstractPacket thePacket = channel.read(buf);
 			NetworkHelper.handle(channel, thePacket);
 		}
