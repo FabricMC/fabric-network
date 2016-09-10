@@ -17,6 +17,8 @@ plugins {
 
 apply plugin: "net.fabricmc.loom"
 
+archivesBaseName = modid
+
 apply from: 'https://github.com/FabricMC/fabric-docs/raw/master/gradle/maven.gradle'
 apply from: 'https://github.com/FabricMC/fabric-docs/raw/master/gradle/license.gradle'
 

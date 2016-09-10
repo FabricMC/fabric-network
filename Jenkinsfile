@@ -1,7 +1,7 @@
 node {
    stage 'Checkout'
 
-   git url: 'https://github.com/FabricMC/fabric-network.git'
+   checkout scm
 
    stage 'Build'
 
