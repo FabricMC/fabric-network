@@ -20,7 +20,7 @@ import net.fabricmc.network.AbstractChannel;
 import net.fabricmc.network.AbstractPacket;
 import net.fabricmc.network.NetworkManager;
 import net.fabricmc.network.util.NetworkHelper;
-import net.minecraft.network.handler.impl.NetworkGameHandlerServer;
+import net.minecraft.network.handler.NetworkGameHandlerServer;
 import net.minecraft.network.packet.server.SPacketCustomPayload;
 import net.minecraft.util.PacketByteBuf;
 import org.spongepowered.asm.mixin.Mixin;

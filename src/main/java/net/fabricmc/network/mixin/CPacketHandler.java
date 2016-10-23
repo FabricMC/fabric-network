@@ -20,7 +20,8 @@ import net.fabricmc.network.AbstractChannel;
 import net.fabricmc.network.AbstractPacket;
 import net.fabricmc.network.NetworkManager;
 import net.fabricmc.network.util.NetworkHelper;
-import net.minecraft.client.network.handler.impl.NetworkGameHandlerClient;
+
+import net.minecraft.client.network.handler.NetworkGameHandlerClient;
 import net.minecraft.network.packet.client.CPacketCustomPayload;
 import net.minecraft.util.PacketByteBuf;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,9 +34,9 @@ public abstract class CPacketHandler {
 
 	@Inject(method = "onCustomPayload(Lnet/minecraft/network/packet/client/CPacketCustomPayload;)V", at = @At("RETURN"))
 	public void onCustomPayload(CPacketCustomPayload packet, CallbackInfo info) {
-		if (packet.channel.startsWith(NetworkManager.CHANNEL_PREFIX)) {
+		if (packet.getChannel().startsWith(NetworkManager.CHANNEL_PREFIX)) {
 			PacketByteBuf buf = packet.getData();
-			AbstractChannel channel = NetworkManager.getChannel(packet.channel.substring(NetworkManager.CHANNEL_PREFIX.length()));
+			AbstractChannel channel = NetworkManager.getChannel(packet.getChannel().substring(NetworkManager.CHANNEL_PREFIX.length()));
 			AbstractPacket thePacket = channel.read(buf);
 			NetworkHelper.handle(channel, thePacket);
 		}

@@ -68,11 +68,11 @@ public abstract class SimpleAbstractChannel<T extends AbstractPacket> extends Ab
     public void sendToAllInRadius(T packet, WorldServer world, Vec3d pos, double radius) {
         double maxDist = radius * radius + radius * radius + radius * radius;
         sendToAll(packet, world.getPlayers(EntityPlayerServer.class,
-                player -> player.getDistanceTo(pos.x, pos.y, pos.z) <= maxDist));
+                player -> player.distanceTo(pos.x, pos.y, pos.z) <= maxDist));
     }
 
     public void sendToAllInRadius(T packet, WorldServer world, Vec3i pos, double radius) {
-        sendToAllInRadius(packet, world, new Vec3d(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5), radius);
+        sendToAllInRadius(packet, world, new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), radius);
     }
 
     public void sendToAllInRadius(T packet, int dimension, Vec3d pos, double radius) {
