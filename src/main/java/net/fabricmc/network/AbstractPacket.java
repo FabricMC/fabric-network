@@ -20,10 +20,10 @@ import net.minecraft.util.PacketByteBuf;
 
 public abstract class AbstractPacket {
 
-    public abstract void write(PacketByteBuf buf);
+	public abstract void write(PacketByteBuf buf);
 
-    public abstract void read(PacketByteBuf buf);
+	public abstract void read(PacketByteBuf buf);
 
-    public abstract void handle();
+	public abstract void handle();
 
 }

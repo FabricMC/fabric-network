@@ -26,18 +26,20 @@ import net.minecraft.util.PacketByteBuf;
  * @param <T> The base packet type.
  */
 public abstract class AbstractChannel<T extends AbstractPacket> {
-    /**
-     * Write a packet to a byte buffer.
-     * @param buf
-     * @param packet
-     */
-    public abstract void write(PacketByteBuf buf, T packet);
+	/**
+	 * Write a packet to a byte buffer.
+	 *
+	 * @param buf
+	 * @param packet
+	 */
+	public abstract void write(PacketByteBuf buf, T packet);
 
-    /**
-     * Read a packet from a byte buffer.
-     * @param buf
-     * @return
-     */
-    public abstract T read(PacketByteBuf buf);
+	/**
+	 * Read a packet from a byte buffer.
+	 *
+	 * @param buf
+	 * @return
+	 */
+	public abstract T read(PacketByteBuf buf);
 
 }

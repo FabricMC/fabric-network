@@ -19,7 +19,6 @@ package net.fabricmc.network.mixin;
 import net.fabricmc.network.test.NetworkTest;
 import net.fabricmc.network.test.TestAsyncPacket;
 import net.fabricmc.network.test.TestPacket;
-;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +31,6 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(value = BlockDirt.class, remap = false)
 public abstract class TestMixin {
 
-
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, Hand hand, Facing facing, float hitX, float hitY, float hitZ) {
 		if (world.isRemote) {
 			NetworkTest.channel.sendToServer(new TestPacket(42));
@@ -40,6 +38,5 @@ public abstract class TestMixin {
 		}
 		return true;
 	}
-
 
 }

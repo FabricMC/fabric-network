@@ -17,7 +17,6 @@
 package net.fabricmc.network.test;
 
 import net.fabricmc.network.AbstractPacket;
-import net.fabricmc.network.Asynchronous;
 import net.minecraft.util.PacketByteBuf;
 
 public class TestPacket extends AbstractPacket {

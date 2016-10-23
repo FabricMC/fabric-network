@@ -20,7 +20,6 @@ import net.fabricmc.network.AbstractChannel;
 import net.fabricmc.network.AbstractPacket;
 import net.fabricmc.network.NetworkManager;
 import net.fabricmc.network.util.NetworkHelper;
-
 import net.minecraft.client.network.handler.NetworkGameHandlerClient;
 import net.minecraft.network.packet.client.CPacketCustomPayload;
 import net.minecraft.util.PacketByteBuf;

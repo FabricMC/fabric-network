@@ -18,11 +18,6 @@ package net.fabricmc.network;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.base.Fabric;
-import net.minecraft.util.PacketByteBuf;
-
-import java.lang.reflect.Method;
 
 public class NetworkManager {
 
@@ -31,7 +26,8 @@ public class NetworkManager {
 	private static final BiMap<String, AbstractChannel> channels = HashBiMap.create();
 
 	public static void registerChannel(String name, AbstractChannel<?> channel) {
-		if (channelExists(name)) throw new IllegalArgumentException("Channel " + name + " is already registered");
+		if (channelExists(name))
+			throw new IllegalArgumentException("Channel " + name + " is already registered");
 		channels.put(name, channel);
 	}
 

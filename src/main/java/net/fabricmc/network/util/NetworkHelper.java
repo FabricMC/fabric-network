@@ -18,7 +18,9 @@ package net.fabricmc.network.util;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.base.Fabric;
-import net.fabricmc.network.*;
+import net.fabricmc.network.AbstractChannel;
+import net.fabricmc.network.AbstractPacket;
+import net.fabricmc.network.Asynchronous;
 import net.minecraft.util.PacketByteBuf;
 
 public class NetworkHelper {

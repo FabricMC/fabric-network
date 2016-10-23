@@ -18,25 +18,8 @@ package net.fabricmc.network.impl;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import net.fabricmc.api.Side;
-import net.fabricmc.api.Sided;
-import net.fabricmc.base.Fabric;
-import net.fabricmc.network.AbstractChannel;
 import net.fabricmc.network.AbstractPacket;
-import net.fabricmc.network.NetworkManager;
-import net.fabricmc.network.util.NetworkHelper;
-import net.minecraft.client.player.EntityPlayerClient;
-import net.minecraft.entity.player.EntityPlayerServer;
-import net.minecraft.network.packet.client.CPacketCustomPayload;
-import net.minecraft.network.packet.server.SPacketCustomPayload;
 import net.minecraft.util.PacketByteBuf;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.WorldServer;
-
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class IndexedChannel extends SimpleAbstractChannel<AbstractPacket> {
 
