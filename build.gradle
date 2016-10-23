@@ -36,4 +36,5 @@ minecraft {
 	version = mc_version
 	fabricVersion = fabric_version
 	pomfVersion = pomf_version
+	refmapName = "fabric-network-refmap.json"
 }
